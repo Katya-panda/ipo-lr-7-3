@@ -1,15 +1,4 @@
 import json # импортируем модуль json для работы с json файлами
-# начальные данные с 5 записями
-data = [
-    {"id": 1, "name": "Model S", "manufacturer": "Tesla", "is_petrol": False, "tank_volume": 100},
-    {"id": 2, "name": "Mustang", "manufacturer": "Ford", "is_petrol": True, "tank_volume": 60},
-    {"id": 3, "name": "Civic", "manufacturer": "Honda", "is_petrol": True, "tank_volume": 50},
-    {"id": 4, "name": "Corolla", "manufacturer": "Toyota", "is_petrol": True, "tank_volume": 55},
-    {"id": 5, "name": "Leaf", "manufacturer": "Nissan", "is_petrol": False, "tank_volume": 0}
-]
-# сохраняем начальные данные в файл
-with open('cars.json', 'w', encoding='utf-8') as file: # открываем файл cars.json для записи с кодировкой utf-8
-    json.dump(data, file, ensure_ascii=False, indent=4) # записываем данные в файл в формате json
 # переменная для подсчета выполненных операций
 operations_count = 0 # инициализируем переменную для подсчета операций
 while True: # основной цикл программы
@@ -29,10 +18,10 @@ while True: # основной цикл программы
             print(json.dumps(record, ensure_ascii=False, indent=4)) # выводим запись в формате json
         operations_count += 1 # увеличиваем счетчик операций
     elif choice == '2': # если выбран пункт 2
-        record_id = int(input("Введите ID: ")) # запрашиваем у пользователя id записи
         # считываем данные из файла
         with open('cars.json', 'r', encoding='utf-8') as file: # открываем файл cars.json для чтения
             data = json.load(file) # загружаем данные из файла в переменную data
+            record_id = int(input("Введите ID: ")) # запрашиваем у пользователя id записи
         # ищем запись по id
         found = False # флаг для обозначения нахождения записи
         for index, record in enumerate(data): # проходим по всем записям в data
@@ -50,11 +39,6 @@ while True: # основной цикл программы
             data = json.load(file) # загружаем данные из файла в переменную data
         # добавляем новую запись
         new_record = {} # создаем новый словарь для новой записи
-        new_record['id'] = int(input("Введите ID: ")) # запрашиваем у пользователя id
-        new_record['name'] = input("Введите название модели: ") # запрашиваем у пользователя название модели
-        new_record['manufacturer'] = input("Введите название производителя: ") # запрашиваем у пользователя название производителя
-        new_record['is_petrol'] = input("Заправляется ли машина бензином (True/False): ").lower() == 'true' # запрашиваем у пользователя тип топлива
-        new_record['tank_volume'] = int(input("Введите объем бака в литрах: ")) # запрашиваем у пользователя объем бака
         data.append(new_record) # добавляем новую запись в data
         # сохраняем обновленные данные в файл
         with open('cars.json', 'w', encoding='utf-8') as file: # открываем файл cars.json для записи
@@ -62,10 +46,10 @@ while True: # основной цикл программы
         print("Запись добавлена") # выводим сообщение
         operations_count += 1 # увеличиваем счетчик операций
     elif choice == '4': # если выбран пункт 4
-        record_id = int(input("Введите ID: "))
         # считываем данные из файла
         with open('cars.json', 'r', encoding='utf-8') as file: # открываем файл cars.json для чтения
             data = json.load(file) # загружаем данные из файла в переменную data
+        record_id = int(input("Введите ID: "))
         # ищем и удаляем запись по id
         found = False # флаг для обозначения нахождения записи
         for index, record in enumerate(data): # проходим по всем записям в data
